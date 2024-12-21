@@ -12,8 +12,8 @@ import SwiftData
 struct InventoryManagementApp: App {
     var body: some Scene {
         WindowGroup {
-            DaftarBarangView()
-                .modelContainer(for: [Barang.self, RiwayatTransaksi.self])
+            DashboardView()
+                .modelContainer(for: [Barang.self, RiwayatTransaksi.self, Supplier.self])
         }
     }
 }
