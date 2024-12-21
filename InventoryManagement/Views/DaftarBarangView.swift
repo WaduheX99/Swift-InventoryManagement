@@ -27,7 +27,7 @@ struct DaftarBarangView: View {
                     LazyVGrid(columns: columns, spacing: 16) {
                         ForEach(barang) { item in
                             NavigationLink(destination: DetailBarangView(barang: item)) {
-                                CardList(barang: item)
+                                CardListBarang(barang: item)
                             }
                         }
                     }

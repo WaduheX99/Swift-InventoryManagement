@@ -15,18 +15,40 @@ struct DetailBarangView: View {
 
     var body: some View {
         VStack {
+            Spacer()
+                .frame(maxHeight: 50)
             if let pathGambar = barang.pathGambar, let uiImage = UIImage(contentsOfFile: pathGambar) {
                 Image(uiImage: uiImage)
                     .resizable()
                     .scaledToFit()
                     .frame(height: 200)
             }
+            else {
+                Image(systemName: "photo")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(height: 200)
+                    .foregroundColor(.gray)
+                    .background(Color.gray.opacity(0.2))
+                    .clipped()
+                    .cornerRadius(30)
+            }
 
-            Text(barang.nama).font(.largeTitle)
-            Text("Deskripsi: \(barang.deskripsi)")
-            Text("Kategori: \(barang.kategori)")
-            Text("Harga: \(barang.harga, format: .currency(code: "IDR"))")
-            Text("Stok: \(barang.stok)")
+            VStack(alignment: .leading) {
+                Text(barang.nama)
+                    .font(.title)
+                    .fontWeight(.bold)
+                    .padding(.bottom, 5)
+                Text("\(barang.deskripsi)")
+                    .font(.body)
+                Text("\(barang.kategori)")
+                    .font(.body)
+                Text("Harga: \(barang.harga, format: .currency(code: "IDR"))")
+                    .font(.body)
+                Text("Stok: \(barang.stok)")
+                    .font(.body)
+            }
+//            .padding(.horizontal)
 
             List(barang.riwayat) { riwayat in
                 HStack {
@@ -59,3 +81,8 @@ struct DetailBarangView: View {
         .navigationTitle(barang.nama)
     }
 }
+
+#Preview {
+    DetailBarangView(barang: Barang(nama: "LB - Performance", deskripsi: "Liberty performance for Huracan LP - 410", kategori: "Body Kit", harga: 200000, stok: 100))
+}
+
