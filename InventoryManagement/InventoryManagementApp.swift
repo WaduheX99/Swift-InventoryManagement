@@ -7,9 +7,15 @@
 
 import SwiftUI
 import SwiftData
+import Firebase
 
 @main
 struct InventoryManagementApp: App {
+    init() {
+        FirebaseApp.configure()
+        print("Firebase App Initialized")
+    }
+    
     var body: some Scene {
         WindowGroup {
             DashboardView()
