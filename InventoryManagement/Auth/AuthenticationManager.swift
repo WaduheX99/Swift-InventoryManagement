@@ -26,8 +26,27 @@ final class AuthenticationManager {
     static let shared = AuthenticationManager()
     private init() {}
     
+    func getAuthUser() throws -> AuthModel {
+        guard let user = Auth.auth().currentUser else {
+            throw URLError(.badServerResponse)
+        }
+        
+        return AuthModel(user: user)
+    }
+    
+    @discardableResult
     func createUser(email: String, password: String) async throws -> AuthModel {
         let authData = try await FirebaseAuth.Auth.auth().createUser(withEmail: email, password: password)
         return AuthModel(user: authData.user)
+    }
+    
+    @discardableResult
+    func login(email: String, password: String) async throws -> AuthModel {
+        let authData = try await FirebaseAuth.Auth.auth().signIn(withEmail: email, password: password)
+        return AuthModel(user: authData.user)
+    }
+    
+    func logOut() throws {
+        try FirebaseAuth.Auth.auth().signOut()
     }
 }

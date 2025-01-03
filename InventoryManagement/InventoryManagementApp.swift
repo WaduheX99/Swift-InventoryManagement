@@ -18,7 +18,7 @@ struct InventoryManagementApp: App {
     
     var body: some Scene {
         WindowGroup {
-            DashboardView()
+            LoginView()
                 .modelContainer(for: [Barang.self, RiwayatTransaksi.self, Supplier.self])
         }
     }

@@ -59,6 +59,7 @@ struct DashboardView: View {
             }
             .navigationTitle("Dashboard")
         }
+        .navigationBarBackButtonHidden()
     }
 }
 
